@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <h1>About</h1>
-    <p>
-      This application is made to have some familiarity with nuxt along with
-      adding some fun with jokes.
+  <div class="text-center container">
+    <div class="fs-2 header">About</div>
+    <p class="fs-6">
+      This application is made to have some familiarity with Vue.js and Nuxt.js
+      along with adding some fun with jokes.
     </p>
   </div>
 </template>
@@ -18,4 +18,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.container {
+  margin-top: 200px;
+}
+</style>

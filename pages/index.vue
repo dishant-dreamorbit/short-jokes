@@ -1,5 +1,8 @@
 <template>
-  <div><h1>welcome, lets have some laugh</h1></div>
+  <div class="text-center container">
+    <div class="fs-2 header">Welcome to Short Jokes</div>
+    <div class="fs-6">Lets navigate to 'Jokes' and have some laugh.</div>
+  </div>
 </template>
 
 <script>
@@ -11,3 +14,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.container {
+  margin-top: 200px;
+}
+</style>

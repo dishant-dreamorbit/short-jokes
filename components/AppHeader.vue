@@ -1,5 +1,5 @@
 <template>
-  <b-navbar type="dark" variant="dark">
+  <b-navbar type="dark" variant="dark" sticky>
     <b-container fluid>
       <nuxt-link to="/" class="brand fs-1 text-decoration-none"
         >Short Jokes</nuxt-link

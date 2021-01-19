@@ -7,7 +7,7 @@ export const state = () => ({
     },
     {
       id: 2,
-      joke: 'what do you call a sheep with no legs? a cloud.    ',
+      joke: 'What do you call a sheep with no legs? A cloud.',
       author: 'Avani',
     },
     {
@@ -28,13 +28,9 @@ export const mutations = {
     })
     state.counter++
   },
-  edit(state, { joke, author }) {
-    state.list.push({
-      id: state.counter,
-      joke,
-      author,
-    })
-    state.counter++
+  edit(state, { id, joke, author }) {
+    const index = state.list.findIndex((item) => item.id === id)
+    state.list[index] = { ...state.list[index], joke, author }
   },
   remove(state, { id }) {
     state.list = state.list.filter((joke) => {

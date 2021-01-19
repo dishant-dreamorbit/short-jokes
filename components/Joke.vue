@@ -1,7 +1,7 @@
 <template>
   <b-card>
     <nuxt-link :to="'jokes/' + id" class="joke-text">
-      {{ joke }}
+      {{ jokeQuestion }}
     </nuxt-link>
   </b-card>
 </template>
@@ -15,8 +15,10 @@ export default {
     joke: { type: String, default: '' },
     id: { type: String, default: '' },
   },
-  created() {
-    this.joke = seperateQuestionAndAnswer(this.joke)[0]
+  computed: {
+    jokeQuestion() {
+      return seperateQuestionAndAnswer(this.joke)[0]
+    },
   },
 }
 </script>

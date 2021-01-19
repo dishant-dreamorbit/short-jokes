@@ -7,8 +7,10 @@
   opacity: 0;
 }
 
-.header {
+.page-header {
   color: mediumseagreen;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .joke-text {

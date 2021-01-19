@@ -38,62 +38,9 @@
             class="joke-container"
         /></b-tab>
         <b-tab title="Added by us" title-link-class="text-secondary">
-          <b-form ref="jokeForm" @submit.prevent="OnSubmit">
-            <b-input-group prepend="Joke">
-              <b-form-input
-                v-model="state.newOwnJoke"
-                data-testid="JokeInput"
-                type="text"
-                placeholder="enter joke ..."
-                required
-              /> </b-input-group
-            ><b-input-group prepend="Author" class="mt-3">
-              <b-form-input
-                v-model="state.newOwnJokeAuthor"
-                data-testid="AuthorInput"
-                type="text"
-                placeholder="enter author ..."
-                required
-              /> </b-input-group
-            ><b-button
-              v-show="state.editId > 0"
-              class="cancel-btn mt-3"
-              variant="outline-secondary"
-              @click="onCancelEdit"
-            >
-              Cancel</b-button
-            ><b-button
-              type="submit"
-              :class="[state.editId > 0 ? 'add-edit-btn' : 'w-100', 'mt-3']"
-            >
-              {{ state.editId > 0 ? 'Edit' : 'Add' }} joke with id
-              {{ state.editId > 0 ? state.editId : jokeId }}</b-button
-            >
-          </b-form>
-          <b-table
-            ref="OwnJokesTable"
-            striped
-            hover
-            :items="ownJokes"
-            class="mt-5"
-            :fields="fields"
-          >
-            <template #cell(action)="data">
-              <b-button
-                variant="outline-secondary"
-                @click="onEditJoke(data.index)"
-              >
-                Edit
-              </b-button>
-              <b-button @click="onDeleteJoke(data.item.id)"> Delete </b-button>
-            </template>
-            <template #cell()="data">
-              <i>{{ data.value }}</i>
-            </template>
-          </b-table>
-        </b-tab>
-      </b-tabs></b-card
-    >
+          <OwnJokes />
+        </b-tab> </b-tabs
+    ></b-card>
   </div>
 </template>
 
@@ -102,19 +49,18 @@ import axios from 'axios'
 import Joke from '@/components/Joke'
 import SearchJokes from '@/components/SearchJokes'
 import { filterJokesContainingQuestion } from '@/utils/jokes'
+import OwnJokes from '@/components/OwnJokes'
 export default {
   components: {
     Joke,
     SearchJokes,
+    OwnJokes,
   },
   data() {
     return {
       state: {
         loadingJokes: false,
         responseErrorModal: { isVisible: false, errorMessage: '' },
-        newOwnJoke: '',
-        newOwnJokeAuthor: '',
-        editId: 0,
       },
       jokesSkeletonListWidth: [
         '60%',
@@ -129,24 +75,7 @@ export default {
         '38%',
       ],
       jokes: [],
-      fields: [
-        'id',
-        'joke',
-        {
-          key: 'author',
-          sortable: true,
-        },
-        'action',
-      ],
     }
-  },
-  computed: {
-    ownJokes() {
-      return this.$store.state.jokes.list
-    },
-    jokeId() {
-      return this.$store.state.jokes.counter
-    },
   },
   async created() {
     const config = {
@@ -192,37 +121,6 @@ export default {
       this.state.responseErrorModal.errorMessage = ''
       ok()
     },
-    OnSubmit() {
-      if (this.state.editId > 0) {
-        this.$store.commit('jokes/edit', {
-          id: this.state.editId,
-          joke: this.state.newOwnJoke,
-          author: this.state.newOwnJokeAuthor,
-        })
-        this.$refs.OwnJokesTable.refresh()
-        this.state.editId = 0
-      } else {
-        this.$store.commit('jokes/add', {
-          joke: this.state.newOwnJoke,
-          author: this.state.newOwnJokeAuthor,
-        })
-      }
-      this.$refs.jokeForm.reset()
-    },
-    onDeleteJoke(id) {
-      this.$store.commit('jokes/remove', {
-        id,
-      })
-    },
-    onEditJoke(index) {
-      this.state.editId = this.ownJokes[index].id
-      this.state.newOwnJoke = this.ownJokes[index].joke
-      this.state.newOwnJokeAuthor = this.ownJokes[index].author
-    },
-    onCancelEdit() {
-      this.state.editId = 0
-      this.$refs.jokeForm.reset()
-    },
   },
   head() {
     return {
@@ -236,12 +134,5 @@ export default {
 .joke-container {
   margin: 10px;
   -webkit-margin-collapse: collapse;
-}
-.cancel-btn {
-  width: 49%;
-}
-.add-edit-btn {
-  width: 49%;
-  float: right;
 }
 </style>

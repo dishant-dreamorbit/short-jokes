@@ -104,7 +104,7 @@
 import axios from 'axios'
 import Joke from '@/components/Joke'
 import SearchJokes from '@/components/SearchJokes'
-import { filterJokesContainingQuestion } from '@/assets/js/util'
+import { filterJokesContainingQuestion } from '@/utils/jokes'
 export default {
   components: {
     Joke,

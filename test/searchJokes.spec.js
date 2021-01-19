@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import SearchJokesComponent from '@/components/SearchJokes.vue'
 
-test('emits event with payload ', () => {
+test('emits event', () => {
   const wrapper = mount(SearchJokesComponent)
   const textInput = wrapper.find('[data-testid="keywordInput"]')
   textInput.element.value = 'nut'

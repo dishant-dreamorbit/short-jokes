@@ -30,7 +30,7 @@
 
 <script>
 import axios from 'axios'
-import { seperateQuestionAndAnswer } from '@/assets/js/util'
+import { seperateQuestionAndAnswer } from '@/utils/jokes'
 
 export default {
   data() {

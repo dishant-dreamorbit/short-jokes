@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { seperateQuestionAndAnswer } from '@/assets/js/util'
+import { seperateQuestionAndAnswer } from '@/utils/jokes'
 
 export default {
   name: 'Joke',
@@ -16,8 +16,7 @@ export default {
     id: { type: String, default: '' },
   },
   created() {
-    const temp = seperateQuestionAndAnswer(this.joke)
-    this.joke = temp[0]
+    this.joke = seperateQuestionAndAnswer(this.joke)[0]
   },
 }
 </script>
